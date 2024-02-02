@@ -3,6 +3,7 @@ package com.paygoal.productsmngt.apirest.controller;
 import com.paygoal.productsmngt.apirest.ProductService;
 import com.paygoal.productsmngt.apirest.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
-    public Product creteProduct(Product product){
+    public Product creteProduct(@RequestBody Product product){
        return productService.createProduct(product);
     }
 
@@ -25,23 +26,44 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public Product searchProductById(@PathVariable("id") Long id){
-        return productService.getProductById(id);
+    public ResponseEntity<Product> searchProductById(@PathVariable("id") Long id){
+        Product product = productService.getProductById(id);
+        if(product != null){
+            return ResponseEntity.ok(product);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
-    @GetMapping("{name}")
-    public Product searchProductByName(@PathVariable("name") String name){
-        return productService.getProductByName(name);
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Product> searchProductByName(@PathVariable("name") String name){
+        Product product = productService.getProductByName(name);
+        if(product != null){
+            return ResponseEntity.ok(product);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("{id}")
-    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product updateProduct){
-        return productService.updateProduct(id, updateProduct);
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @RequestBody Product updateProduct){
+        Product product = productService.updateProduct(id, updateProduct);
+        if(product != null){
+            return ResponseEntity.ok(updateProduct);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("{id}")
-    public void deleteProductPyId(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteProductPyId(@PathVariable("id") Long id){
+        Boolean deleted = productService.deleteProduct(id);
 
-        productService.deleteProduct(id);
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

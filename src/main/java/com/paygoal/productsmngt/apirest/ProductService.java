@@ -31,11 +31,13 @@ public class ProductService {
 
         Product existProduct = productRepository.findById(id).orElse(null);
         if (existProduct != null) {
-            existProduct.setNombre(updateProduct.getNombre());
+            updateProduct.setId(id);
+
             existProduct.setNombre(updateProduct.getNombre());
             existProduct.setDescripcion(updateProduct.getDescripcion());
             existProduct.setPrecio(updateProduct.getPrecio());
             existProduct.setCantidad(updateProduct.getCantidad());
+
             return productRepository.save(existProduct);
         }
         return null;
@@ -45,7 +47,14 @@ public class ProductService {
         return productRepository.findAllByOrderByPrecioAsc();
     }
 
-    public void deleteProduct(Long id){
-        productRepository.deleteById(id);
+    public Boolean deleteProduct(Long id) {
+        Product existProduct = productRepository.findById(id).orElse(null);
+        if (existProduct != null) {
+            productRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
