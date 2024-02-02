@@ -14,3 +14,10 @@ Eliminar un producto existente.
 Funcionales adicionales: 
 Consultar todos los productos ordenados por precio.
 La solución debe incluir el código fuente completo, documentación detallada sobre cómo ejecutar y probar el sistema, y cualquier otra información adicional que el candidato considere relevante.
+
+La Api acepta peticiones GET, POST, PUT y DELETE.
+el server corre en el puerto 8080 y los enpoint son los siguientes:
+get: /products => Devuelve todos los productos ordenados por precio de menor a mayo
+get: /products/:id => Devuelve el producto del id correspondiente
+get: /products/name/:nombre =>Devuelve los producto por su nombre con coincidencia exacta
+

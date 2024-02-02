@@ -9,7 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Optional<Product> findByNombre(String name);
+    //Optional<Product> findByNombre(String name); //Devuelva solo la primer ocurrencia
+    List<Product> findByNombre(String name);
 
     List<Product> findAllByOrderByPrecioAsc();
 }

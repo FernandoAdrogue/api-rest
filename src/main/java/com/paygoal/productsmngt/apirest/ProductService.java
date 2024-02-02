@@ -21,11 +21,14 @@ public class ProductService {
         Optional<Product> optionalProduct = productRepository.findById(id);
         return optionalProduct.orElse(null);
     }
-
-    public Product getProductByName(String name){
-        Optional<Product> optionalProduct = productRepository.findByNombre(name);
-        return optionalProduct.orElse(null);
+    public List<Product> getProductsByName(String name) {
+        return productRepository.findByNombre(name);
     }
+
+    //public Product getProductByName(String name){ //Devuelve solo la primer ocurrencia
+    //    Optional<Product> optionalProduct = productRepository.findByNombre(name);
+    //    return optionalProduct.orElse(null);
+    //}
 
     public Product updateProduct(Long id, Product updateProduct){
 

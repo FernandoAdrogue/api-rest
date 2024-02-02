@@ -37,10 +37,10 @@ public class ProductController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Product> searchProductByName(@PathVariable("name") String name){
-        Product product = productService.getProductByName(name);
-        if(product != null){
-            return ResponseEntity.ok(product);
+    public ResponseEntity<List<Product>> searchProductsByName(@PathVariable("name") String name){
+        List<Product> products = productService.getProductsByName(name);
+        if(!products.isEmpty()){
+            return ResponseEntity.ok(products);
         }else{
             return ResponseEntity.notFound().build();
         }
