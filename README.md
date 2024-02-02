@@ -17,7 +17,22 @@ La solución debe incluir el código fuente completo, documentación detallada s
 
 La Api acepta peticiones GET, POST, PUT y DELETE.
 el server corre en el puerto 8080 y los enpoint son los siguientes:
-get: /products => Devuelve todos los productos ordenados por precio de menor a mayo
-get: /products/:id => Devuelve el producto del id correspondiente
-get: /products/name/:nombre =>Devuelve los producto por su nombre con coincidencia exacta
 
+get: /products => Devuelve todos los productos ordenados por precio de menor a mayor
+
+get: /products/:id => Devuelve el producto del id correspondiente
+
+get: /products/name/:nombre =>Devuelve todos los producto por su nombre con coincidencia exacta
+
+post: /products => Crea un nuevo producto
+
+put:  /products/:id =>Actualiza un producto segun su ID
+    el json que recive tiene el siguiente formato:
+    {
+        "nombre": <String>,
+        "descripcion": <String>,
+        "cantidad": <Integer>,
+        "precio": <Float>
+    }
+
+delete: /products/:id =>Elimina un producto segun su ID
